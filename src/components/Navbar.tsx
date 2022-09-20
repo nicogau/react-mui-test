@@ -1,21 +1,14 @@
 import {Box, styled, Typography} from '@mui/material'
+import {palette} from '@mui/system'
 import React from 'react'
 
-// style of the Navbar 
-const NavbarBox = styled(Box)(({theme}) => ({
-  background: '#f1f1f1',
-  width: '100%',
-  height: '100px',
-  "& .brand": {
-    color:'red',
-    [theme.breakpoints.down('sm')]: {
-      color: 'blue' 
-    }
-  },
-  "& .language": {}
-}))
 
-const Navbar = () => {
+interface NavbarProps {
+  brand: string
+
+}
+
+const Navbar = ({brand}: NavbarProps) => {
 
   return (
     <NavbarBox>
@@ -31,7 +24,7 @@ const Navbar = () => {
           }}
         >
           <Typography className='brand' variant='h4' >
-            Merlo
+            {brand}
           </Typography>
            {/* language selector */}
           <Typography 
@@ -45,6 +38,23 @@ const Navbar = () => {
     </NavbarBox>
   )
 }
+
+/* style of the Navbar 
+ *  theme : inherited from  default material-ui theme or customized one
+*/
+const NavbarBox = styled(Box)(({theme}) => ({
+  background: theme.navbar.background,
+  // background: theme.palette.background.default,
+  width: '100%',
+  height: '100px',
+  "& .brand": {
+    color:'red',
+    [theme.breakpoints.down('sm')]: {
+      color: 'blue' 
+    }
+  },
+  "& .language": {}
+}))
 
 export default Navbar
 
